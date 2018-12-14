@@ -1,0 +1,48 @@
+{
+  "name": "uni-fetch-client",
+  "version": "1.0.0",
+  "description": "JavaScript HTTP client using fetch API with possibility to force using XHR.",
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "main": "fetch-client.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/glebpl/uni-fetch-client.git"
+  },
+  "author": "Gleb Plakhotnik",
+  "license": "MIT",
+  "scripts": {
+    "build": "cross-env NODE_ENV=production webpack",
+    "watch:build": "cross-env NODE_ENV=development webpack -w",
+    "release": "node ./scripts/release.js",
+    "prepublishOnly": "npm run build",
+    "lint": "eslint src",
+    "lint:fix": "eslint examples --fix",
+    "test": "npm run lint && jest"
+  },
+  "dependencies": {
+    "abortcontroller-polyfill": "^1.2.1",
+    "whatwg-fetch": "^3.0.0"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.1.5",
+    "@babel/core": "^7.1.6",
+    "@babel/plugin-proposal-class-properties": "^7.1.0",
+    "@babel/preset-env": "^7.1.6",
+    "babel-core": "^7.0.0-bridge.0",
+    "babel-eslint": "^10.0.1",
+    "babel-jest": "^23.6.0",
+    "babel-loader": "^8.0.4",
+    "cross-env": "^5.2.0",
+    "eslint": "^5.10.0",
+    "eslint-plugin-import": "^2.14.0",
+    "in-publish": "^2.0.0",
+    "jest": "^23.6.0",
+    "readline-sync": "^1.4.9",
+    "regenerator-runtime": "^0.13.1",
+    "webpack": "^4.27.1",
+    "webpack-cli": "^3.1.2"
+  }
+}
