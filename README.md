@@ -1,3 +1,11 @@
+# Description
+Simple JavaScript HTTP client using fetch API with possibility to force using XHR.
+
+Has possibility to abort requests with AbortController (polyfill inside).
+
+# Installation
+`npm install --save uni-fetch-client`
+
 # Examples
 ## Create client
 ```
