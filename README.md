@@ -42,3 +42,15 @@ const someHandler = () => {
     abortController.abort();
 };
 ```
+
+## Request headers
+```
+client.postJson("/messages/create", {
+    data: {
+        message: "Some data"
+    }
+    , headers: {
+        "Authorization": "Basic yourbase64encoded="
+    }
+});
+```
