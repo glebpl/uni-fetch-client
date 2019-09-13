@@ -2,6 +2,9 @@
 
 import {makeUrl} from "./utils";
 import {FetchClient} from "./FetchClient";
+import {ParseError as _ParseError} from "./ParseError";
+import {TransportError as _TransportError} from "./TransportError";
+import * as C from "./constants";
 
 export {
     METHOD_GET
@@ -17,3 +20,14 @@ export const create = options => new FetchClient(options);
 export const createAbortController = () => new AbortController();
 export {ParseError} from "./ParseError";
 export {TransportError} from "./TransportError";
+
+const lib = {
+    url
+    , create
+    , createAbortController
+    , ParseError: _ParseError
+    , TransportError: _TransportError
+    , ...C
+};
+
+export default lib;

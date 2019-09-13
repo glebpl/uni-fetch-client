@@ -9,6 +9,8 @@ Has possibility to abort requests with AbortController (polyfill inside).
 # Examples
 ## Create client
 ```
+import FetchClient from 'uni-fetch-client';
+
 const client = FetchClient.create({
     host: "your.host.com"
     , secure: true

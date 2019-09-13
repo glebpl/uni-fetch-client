@@ -32,16 +32,20 @@ export const serializeObject = data => Object.keys(data).map(k => {
  * @return {string}
  */
 export const makeUrl = (host, path = "/", port = 80, secure) => {
-    port = Number(port);
+    if(host) {
+        port = Number(port);
 
-    secure = secure === true || ( port === 443 && secure !== false );
+        secure = secure === true || ( port === 443 && secure !== false );
 
-    const protocol = `http${secure ? "s" : ""}:`;
-    // remove slash from host
-    const hostString = host.substr(-1) === "/" ? host.slice(0, -1) : host;
-    const portString = port && port !== 80 && port !== 443 ? `:${port}` : "";
-    const pathString = path && path !== "/" ? ( path.substr(0, 1) === "/" ? path : `/${path}` ) : "";
+        const protocol = `http${secure ? "s" : ""}:`;
+        // remove slash from host
+        const hostString = host.substr(-1) === "/" ? host.slice(0, -1) : host;
+        const portString = port && port !== 80 && port !== 443 ? `:${port}` : "";
+        const pathString = path && path !== "/" ? ( path.substr(0, 1) === "/" ? path : `/${path}` ) : "";
 
-    return `${protocol}//${hostString}${portString}${pathString}`;
+        return `${protocol}//${hostString}${portString}${pathString}`;
+    } else {
+        return path;
+    }
 };
 

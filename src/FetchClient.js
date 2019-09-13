@@ -9,6 +9,8 @@ const _global = (1, eval)("this");
 export const {
     METHOD_GET
     , METHOD_POST
+    , METHOD_PUT
+    , METHOD_DELETE
     , MODE_CORS
     , MODE_NO_CORS
     , ERROR_PARSE_JSON_RESPONSE
@@ -65,7 +67,7 @@ export class FetchClient {
         let {data = ""} = options;
         let url = this.url(path);
 
-        if(method === METHOD_POST) {
+        if(method === METHOD_POST || method === METHOD_PUT) {
             finalOptions.body = "string" === typeof data ? data : JSON.stringify(data);
         } else {
             if("object" === typeof data) {
@@ -119,7 +121,7 @@ export class FetchClient {
             ...options
             , headers: {
                 "Accept": "application/json, text/plain, */*"
-                , "Content-Type": "application/json"
+                , "Content-Type": "application/json; charset=UTF-8"
                 , ...this.getRequestOption(options, "headers", {})
             }
         }).then(json);
@@ -148,6 +150,17 @@ export class FetchClient {
     }
 
     /**
+     * Forces PUT method in request
+     * Resolves with parsed json
+     * @param {string} path
+     * @param {Object} options
+     * @return {Promise}
+     */
+    putJson(path, options = {}) {
+        return this.fetchJson(path, {...options, method: METHOD_PUT});
+    }
+
+    /**
      * @param {string} path
      * @param {Object} options
      * @return {Promise}
@@ -161,5 +174,13 @@ export class FetchClient {
                 , ...this.getRequestOption(options, "headers", {})
             }
         }).then(arrayBuffer);
+    }
+
+    delete(path, options = {}) {
+        return this.fetch(path, {
+            ...options
+            , method: METHOD_DELETE
+            , headers: this.getRequestOption(options, "headers", {})
+        });
     }
 }
