@@ -45,6 +45,15 @@ export class FetchClient {
         return key in this.options ? this.options[key] : def;
     }
 
+    setOption(key, value) {
+        this.options[key] = value;
+        return this;
+    }
+
+    deleteOption(key) {
+        delete this.options[key];
+    }
+
     getRequestOption (options, key, def = null) {
         return key in options ? options[key] : this.getOption(key, def);
     }
