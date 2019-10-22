@@ -18,10 +18,6 @@ export const statusCheck = response => {
         if(response.ok) {
             return resolve(response);
         } else {
-            console.error("statusCheck is not ok", response);
-
-            _logHeaders(response);
-
             const err = new TransportError(response);
 
             text(response).then(s => {

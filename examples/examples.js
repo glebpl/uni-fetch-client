@@ -53,7 +53,9 @@ if(FetchClient) {
                 msg = `Got ParseError ${err.code}: ${err.message}`;
             } else if(err instanceof TransportError) {
                 // On non-cors request err will contain response object with true status
-                msg = `Got TransportError ${err.code}: ${err.message}: ${err.responseText}`;
+                msg = `
+                Got TransportError ${err.code}: ${err.message}: ${err.responseText}: ${JSON.stringify(err.responseHeaders)}
+                `;
             } else if(err instanceof DOMException) {
                 if(err.name === "AbortError") {
                     msg = `Request aborted ${Date.now()}`;

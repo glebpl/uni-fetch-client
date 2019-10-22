@@ -56,3 +56,28 @@ client.postJson("/messages/create", {
     }
 });
 ```
+
+## Error handling
+```
+client.getJson("/bad/resource").then(() => {}, err => {
+    if(err instanceof ParseError) {
+        msg = `Got ParseError ${err.code}: ${err.message}`;
+    } else if(err instanceof TransportError) {
+        msg = ```
+            Got TransportError ${err.code}: ${err.message}: ${err.responseText}: 
+            ${JSON.stringify(err.responseHeaders)}
+        ```;
+    } else if(err instanceof DOMException) {
+        if(err.name === "AbortError") {
+            // We will be here if AbortController is used (see above)
+            msg = `Request aborted ${Date.now()}`;
+        } else {
+            console.error(err);
+        }
+    } else if(err instanceof TypeError) {
+        // Also will happen on cors requests when 404 status comes
+        // mode of fetch has no effect at this case
+        msg = `Request failed due to network error ${Date.now()}`;
+    }
+});
+```
